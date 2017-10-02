@@ -1,4 +1,4 @@
-# Code Book
+# Tidy Dataset Code Book
 
 ## Source Data Used
 
@@ -6,7 +6,7 @@ The source data used is automatically downloaded and extracted from:
 - [https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 
 A single merged dataset is created from a combination of training and test measurement datasets provided within this
-download.
+archive.  There are several files contained within, but those used complete the project are as follows:
 
 - List of subjects from files:
     - `UCI HAR Dataset/train/subject_train.txt`
@@ -26,7 +26,9 @@ download.
     - `UCI HAR Dataset/features.txt`
     - More info about these variables can be found in `UCI HAR Dataset/features_info.txt`
 
-## Tidy Output Dataset
+## Tidy Dataset
+
+The tidy dataset [activity_subject_averages.csv](activity_subject_averages.csv) is created by first extracting only the measurements on the mean and standard deviation for each measurement from the merged dataset created from the source data above, and then averaging each variable for each activity and each subject.
 
 <table>
 <tr><th>Variable</th><th>Description</th></tr>
@@ -45,7 +47,7 @@ download.
     <td>
         The activity performed.  One of the following six values:         
         <li>LAYING                                                                                 
-        <li>SITTING                                                                                 
+        <li>SITTING                                                                                 git 
         <li>STANDING                                                                                 
         <li>WALKING                                                                                 
         <li>WALKING_DOWNSTAIRS                                                                                 

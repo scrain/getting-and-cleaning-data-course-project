@@ -58,19 +58,22 @@ dataset$activity <- activities$name[dataset$activity]
 # 4)  Appropriately label the data set with descriptive variable names.
 #
 # The goal here was:
-# - have more explicit and descriptive names.  
+# - have more explicit and descriptive names.
 # - use all lowercase
 # - use period "." in place of spaces
 #
 
-names(dataset) <- sub('^t', 'time.', names(dataset))
+names(dataset) <- sub('^t', 'time.',      names(dataset))
 names(dataset) <- sub('^f', 'frequency.', names(dataset))
-names(dataset) <- gsub('Body', 'body.', names(dataset))
+
+names(dataset) <- gsub('Body',     'body.', names(dataset))
+names(dataset) <- sub('body.body', 'body',  names(dataset))
+
 names(dataset) <- sub('Gravity', 'gravity.', names(dataset))
-names(dataset) <- sub('Acc', 'acc.', names(dataset))
-names(dataset) <- sub('Jerk', 'jerk.', names(dataset))
-names(dataset) <- sub('Gyro', 'gyro.', names(dataset))
-names(dataset) <- sub('Mag', 'mag.', names(dataset))
+names(dataset) <- sub('Acc',     'acc.',     names(dataset))
+names(dataset) <- sub('Jerk',    'jerk.',    names(dataset))
+names(dataset) <- sub('Gyro',    'gyro.',    names(dataset))
+names(dataset) <- sub('Mag',     'mag.',     names(dataset))
 
 names(dataset) <- sub('-mean\\(\\)-X', 'x.mean', names(dataset))
 names(dataset) <- sub('-mean\\(\\)-Y', 'y.mean', names(dataset))
@@ -80,14 +83,12 @@ names(dataset) <- sub('-mean\\(\\)',   'mean',   names(dataset))
 names(dataset) <- sub('-meanFreq\\(\\)-X', 'x.mean.frequency', names(dataset))
 names(dataset) <- sub('-meanFreq\\(\\)-Y', 'y.mean.frequency', names(dataset))
 names(dataset) <- sub('-meanFreq\\(\\)-Z', 'z.mean.frequency', names(dataset))
-names(dataset) <- sub('-meanFreq\\(\\)',   'mean.frequency', names(dataset))
+names(dataset) <- sub('-meanFreq\\(\\)',   'mean.frequency',   names(dataset))
 
 names(dataset) <- sub('-std\\(\\)-X', 'x.stdev', names(dataset))
 names(dataset) <- sub('-std\\(\\)-Y', 'y.stdev', names(dataset))
 names(dataset) <- sub('-std\\(\\)-Z', 'z.stdev', names(dataset))
 names(dataset) <- sub('-std\\(\\)',   'stdev',   names(dataset))
-
-names(dataset) <- sub('body.body',   'body',   names(dataset))
 
 #
 # 5) From the data set in step 4, creates a second, independent tidy data set with the average of each
@@ -99,4 +100,4 @@ averagesByActivityAndSubject <-
     group_by(subject, activity) %>%
       summarize_all(funs(mean))
 
-write.table(averagesByActivityAndSubject, file='activity_subject_averages.csv', sep=',', row.names=FALSE)
+write.csv(averagesByActivityAndSubject, file='activity_subject_averages.csv', row.names=FALSE)
