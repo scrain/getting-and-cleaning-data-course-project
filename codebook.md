@@ -59,7 +59,8 @@ The tidy dataset [activity_subject_averages.csv](activity_subject_averages.csv) 
         3 through 81
     </td>
     <td>
-        The remaining 79 variables are averages of all values for the given subject and activity
+        The remaining 79 variables are averages of all values for the given subject and activity.  
+        Each of the 79 variable names have multiple parts and is broken down as follows.
         <table>
             <tr><th>label</th><th>description</th></tr>
             <tr><td>time</td><td>signal from time related domain</td></tr>
@@ -74,6 +75,7 @@ The tidy dataset [activity_subject_averages.csv](activity_subject_averages.csv) 
             <tr><td>mean</td><td>mean value</td></tr>
             <tr><td>stdev</td><td>standard deviation</td></tr>
         </table>
+        Full list
         <li> time.body.acc.x.mean
         <li> time.body.acc.y.mean
         <li> time.body.acc.z.mean
