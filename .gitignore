@@ -1,0 +1,6 @@
+.Rapp.history
+.Rhistory
+dataset.zip
+UCI HAR Dataset/
+.idea/
+.DS_Store
