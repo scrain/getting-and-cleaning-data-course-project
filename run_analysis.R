@@ -7,9 +7,9 @@ if (!file.exists('UCI HAR Dataset')) {
   unzip('dataset.zip')
 }
 
-#
-# 1)  Merge the training and the test sets to create one data set.
-#
+# #################################################################################################
+# 1)  Merge the training and the test sets to create one large dataset
+# #################################################################################################
 
 # create combined data.frame for all training and test subject identifiers
 subjectIds <- rbind(
@@ -36,9 +36,9 @@ names(data) <- features$name
 # finally combine subjects, activities and datasets into one data set
 dataset <- cbind(subjectIds, activityLabels, data)
 
-#
+# #################################################################################################
 # 2)  Extract only the measurements on the mean and standard deviation for each measurement
-#
+# #################################################################################################
 
 # grep the column indices containing means and standard deviations
 meanAndStandardDeviationVariables <- grep('(std|mean)', names(dataset))
@@ -46,17 +46,19 @@ meanAndStandardDeviationVariables <- grep('(std|mean)', names(dataset))
 # take subset containing variables for subject, activity and the matched variables
 dataset <- dataset[, c(1, 2, meanAndStandardDeviationVariables)]
 
-#
+# #################################################################################################
 # 3)  Use descriptive activity names to name the activities in the data set
-#
+# #################################################################################################
 
 # load the activity label names and replace the dataset's activity variable with the more descriptive value
+
 activities <- read.table('UCI HAR Dataset/activity_labels.txt', col.names = c('label', 'name'))
 dataset$activity <- activities$name[dataset$activity]
 
-#
+# #################################################################################################
 # 4)  Appropriately label the data set with descriptive variable names.
-#
+# #################################################################################################
+
 # The goal here was:
 # - have more explicit and descriptive names.
 # - use all lowercase
@@ -90,10 +92,10 @@ names(dataset) <- sub('-std\\(\\)-Y', 'y.stdev', names(dataset))
 names(dataset) <- sub('-std\\(\\)-Z', 'z.stdev', names(dataset))
 names(dataset) <- sub('-std\\(\\)',   'stdev',   names(dataset))
 
-#
-# 5) From the data set in step 4, creates a second, independent tidy data set with the average of each
-#    variable for each activity and each subject.
-#
+# #################################################################################################
+# 5) From the data set in step 4, creates a second, independent tidy data set with the average of
+#    each variable for each activity and each subject.
+# #################################################################################################
 
 averagesByActivityAndSubject <-
   dataset %>%
