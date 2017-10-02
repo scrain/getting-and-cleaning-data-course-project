@@ -41,7 +41,7 @@ dataset <- cbind(subjectIds, activityLabels, data)
 #
 
 # grep the column indices containing means and standard deviations
-meanAndStandardDeviationVariables <- grep('(-std\\(\\)|-mean\\(\\))', names(dataset))
+meanAndStandardDeviationVariables <- grep('(std|mean)', names(dataset))
 
 # take subset containing variables for subject, activity and the matched variables
 dataset <- dataset[, c(1, 2, meanAndStandardDeviationVariables)]
@@ -56,6 +56,11 @@ dataset$activity <- activities$name[dataset$activity]
 
 #
 # 4)  Appropriately label the data set with descriptive variable names.
+#
+# The goal here was:
+# - have more explicit and descriptive names.  
+# - use all lowercase
+# - use period "." in place of spaces
 #
 
 names(dataset) <- sub('^t', 'time.', names(dataset))
@@ -72,10 +77,17 @@ names(dataset) <- sub('-mean\\(\\)-Y', 'y.mean', names(dataset))
 names(dataset) <- sub('-mean\\(\\)-Z', 'z.mean', names(dataset))
 names(dataset) <- sub('-mean\\(\\)',   'mean',   names(dataset))
 
+names(dataset) <- sub('-meanFreq\\(\\)-X', 'x.mean.frequency', names(dataset))
+names(dataset) <- sub('-meanFreq\\(\\)-Y', 'y.mean.frequency', names(dataset))
+names(dataset) <- sub('-meanFreq\\(\\)-Z', 'z.mean.frequency', names(dataset))
+names(dataset) <- sub('-meanFreq\\(\\)',   'mean.frequency', names(dataset))
+
 names(dataset) <- sub('-std\\(\\)-X', 'x.stdev', names(dataset))
 names(dataset) <- sub('-std\\(\\)-Y', 'y.stdev', names(dataset))
 names(dataset) <- sub('-std\\(\\)-Z', 'z.stdev', names(dataset))
 names(dataset) <- sub('-std\\(\\)',   'stdev',   names(dataset))
+
+names(dataset) <- sub('body.body',   'body',   names(dataset))
 
 #
 # 5) From the data set in step 4, creates a second, independent tidy data set with the average of each
@@ -87,4 +99,4 @@ averagesByActivityAndSubject <-
     group_by(subject, activity) %>%
       summarize_all(funs(mean))
 
-write.table(averagesByActivityAndSubject, file='activity_subject_averages.txt', row.names=FALSE)
+write.table(averagesByActivityAndSubject, file='activity_subject_averages.csv', sep=',', row.names=FALSE)
