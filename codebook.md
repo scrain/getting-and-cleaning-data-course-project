@@ -47,7 +47,7 @@ The tidy dataset [activity_subject_averages.csv](activity_subject_averages.csv) 
     <td>
         The activity performed.  One of the following six values:         
         <li>LAYING                                                                                 
-        <li>SITTING                                                                                 git 
+        <li>SITTING
         <li>STANDING                                                                                 
         <li>WALKING                                                                                 
         <li>WALKING_DOWNSTAIRS                                                                                 
